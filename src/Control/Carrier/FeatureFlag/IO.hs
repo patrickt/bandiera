@@ -64,7 +64,7 @@ globalEnableIO :: MVar FlagSet -> TypeRep -> IO ()
 globalEnableIO fs rep = withMVar fs $ \(FlagSet globals _) -> H.insert globals rep ()
 
 globalDisableIO :: MVar FlagSet -> TypeRep -> IO ()
-globalDisableIO fs rep = withMVar fs $ \(FlagSet globals _) -> H.insert globals rep ()
+globalDisableIO fs rep = withMVar fs $ \(FlagSet globals _) -> H.delete globals rep ()
 
 globalCheckForIO :: MVar FlagSet -> SomeHashable -> TypeRep -> IO Bool
 globalCheckForIO fs item rep = withMVar fs $ \(FlagSet _ perDatum) -> do
