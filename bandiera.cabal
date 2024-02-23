@@ -1,0 +1,45 @@
+cabal-version:      3.4
+name:               bandiera
+version:            0.1.0.0
+synopsis:           Feature-flagging with fused-effects.
+-- description:
+homepage:           github.com/patrickt/bandiera
+license:            MIT
+license-file:       LICENSE
+author:             Patrick Thomson
+maintainer:         patrickt@github.com
+-- copyright:
+category:           Data
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+-- extra-source-files:
+
+common shared
+       default-language: GHC2021
+       ghc-options: -Wall
+
+library
+       import: shared
+       hs-source-dirs: src
+       exposed-modules:
+          Control.Effect.FeatureFlag
+          Control.Carrier.FeatureFlag.IO
+       build-depends:
+          base ^>=4.16.3.0
+        , fused-effects >= 1.1 && < 2
+        , hashable
+        , hashtables >= 1.3
+
+
+test-suite bandiera-test
+    import:           shared
+
+    -- other-modules:
+    -- other-extensions:
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:
+          base
+        , fused-effects
+        , tasty >= 1.5
